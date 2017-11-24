@@ -1,0 +1,92 @@
+body {
+	background-color: lightgoldenrodyellow;
+}
+
+/* FORM */
+/* legend { background-color: rgb(181, 228, 242)} */
+fieldset {
+	padding: 10px;
+	border-radius: 10px;
+	background-color: rgb(181, 228, 242);
+ }
+ 
+ fieldset label {
+	display: inline-block;
+	margin-bottom: 10px;
+ }
+ 
+ form input {
+	float: right;
+	margin-right: 20px;
+	width: 150px;
+ }
+ 
+ form input:invalid {
+	background-color: pink;
+ }
+ 
+ form input:valid {
+	background-color: lightgreen;
+ }
+ 
+ /* SEARCH DIV */
+ 
+#searchDiv {
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: rgb(181, 228, 242);
+	padding: 10px;
+}
+
+#searchDiv input {
+	/* float: right; */
+	margin-left: 30px;
+	background-color: lightcyan;
+	width: 150px;
+}
+
+ /*  TABLE */
+ table {
+	margin-top: 20px;
+ }
+ table,
+ tr,
+ td,
+ th {
+	border: 1px solid blue;
+ }
+ 
+ tr,
+ td,
+ th {
+	padding-left: 10px;
+	padding-right: 10px;
+ }
+ 
+ th {
+	background-color: lightblue;
+ }
+ 
+ tr:nth-child(even) {
+	background-color: lightsteelblue;
+ }
+ 
+ tr:nth-child(odd) {
+	background-color: lightcyan;
+ }
+ 
+ tr:hover {
+	background-color: lightgreen;
+ }
+ 
+ td.trashIcon {
+	background-image: url("../img/trash-icon.png");
+	/* background-color: transparent; */
+	background-position: center center;
+	background-repeat: no-repeat;
+	width: 20px;
+	/* padding-left: 5px;
+		padding-right: 5px; */
+	/* padding: 30px; */
+ }
+ 

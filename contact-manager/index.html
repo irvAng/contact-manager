@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>A contact manager, v3</title>
+  <meta charset="utf-8" />
+
+  <script src='js/names.js'></script>
+  <script src='js/contact-manager.js'></script>
+  <script src='js/utilities.js'></script>
+  <script src='js/search-compare.js'></script>
+  <script src='js/table-display.js'></script>
+  <script src='js/table-listeners.js'></script>
+  <script src='js/listeners.js'></script>
+  <script src='js/script.js'></script>
+
+  <link rel='stylesheet' href='css/style.css'>
+</head>
+
+<body>
+  <form id='inputForm' onsubmit="return formSubmitted();">
+    <fieldset>
+      <legend>Personal informations</legend>
+      <label>
+        Name :
+        <input type="text" id="name" required placeholder="First Last">
+      </label>
+      <label>
+        Age :
+        <input type="number" min='0' max='120' id="age" required>
+      </label>
+      <label>
+        Email :
+        <input type="email" id="email" required>
+      </label>
+
+      <label>
+        City :
+        <input type="text" id="city">
+      </label>
+      <label>
+        Zip Code :
+        <input type="number" min='0' max='99999' id="zipCode" placeholder='00000'>
+      </label>
+      <label>
+        Country :
+        <input type="text" id="country">
+      </label>
+      <br>
+      <button>Add new Contact</button>
+      <button id='addRandomContact' type='button'>Add two random Contacts</button>
+    </fieldset>
+  </form>
+  <br>
+  <div id='searchDiv'>
+    <label for="searchInput">Search contact by name:
+      <input id='searchInput' type="text" placeholder="First Last">
+    </label>
+    <!-- Displays matches -->
+    <input id='match-display' type='text' readonly placeholder="Displaying all contacts.">
+    <button id='printList'> Print contacts to console</button>
+
+  </div>
+
+
+
+  <h2>List of contacts </h2>
+  <!-- <h3>&#x25B2; &#x25BC; &#9650; &#9660;</h3> -->
+  <div id="contacts">
+    <!-- TABLE GOES HERE -->
+  </div>
+
+  <p>
+    <button onclick="emptyList();">Empty</button>
+    <button onclick="cm.save();">Save</button>
+    <button onclick="loadList();">Load</button>
+  </p>
+
+</body>
+
+</html>
