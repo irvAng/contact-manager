@@ -26,31 +26,19 @@ function sortTable(n) {
 			x = rows[i].getElementsByTagName("TD")[n];
 			y = rows[i + 1].getElementsByTagName("TD")[n];
 
-			// console.log( parseInt(x.innerHTML) >= 0);
-
-			//only if it is a number that is not NaN, it will return true
-			//not working properly with 'Infinity'
-			if ((parseInt(x.innerHTML) >= 0) || (parseInt(x.innerHTML) <= 0)) {
-				x = parseInt(x.innerHTML);
-				y = parseInt(y.innerHTML);
-			} else {
-				// it is a string, do the same thing, 
-				x = x.innerHTML.toLowerCase();
-				y = y.innerHTML.toLowerCase();
-			}
 
 			/*check if the two rows should switch place,
 			based on the direction, asc or desc:*/
 			if (dir == "asc") {
 
-				if (x > y) {
+				if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
 
 					//if so, mark as a switch and break the loop:
 					shouldSwitch = true;
 					break;
 				}
 			} else if (dir == "desc") {
-				if (x < y) {
+				if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
 
 					//if so, mark as a switch and break the loop:
 					shouldSwitch = true;

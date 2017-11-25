@@ -1,5 +1,6 @@
 body {
 	background-color: lightgoldenrodyellow;
+	font-size: 20px;
 }
 
 /* FORM */
@@ -48,6 +49,7 @@ fieldset {
  /*  TABLE */
  table {
 	margin-top: 20px;
+	width: 100%;
  }
  table,
  tr,
@@ -59,8 +61,7 @@ fieldset {
  tr,
  td,
  th {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 7px 10px 7px 10px;
  }
  
  th {
@@ -88,5 +89,9 @@ fieldset {
 	/* padding-left: 5px;
 		padding-right: 5px; */
 	/* padding: 30px; */
+ }
+
+ td.trashIcon:hover {
+	background-color: rgb(252, 62, 62);
  }
  

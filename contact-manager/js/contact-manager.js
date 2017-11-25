@@ -62,24 +62,6 @@ class ContactManager {
 		}
 	}
 
-	static createRandomContact() {
-		let n = getRandomFromArray(firstNames);//first
-		let last = getRandomFromArray(lastNames);//last
-		let e = last + "@" + n + '.com';//last@first.com
-		
-		e = e.toLocaleLowerCase();
-		n = n + " " + last;//first + last
-		
-		let a = Math.round(Math.random() * 100);
-		let ct = getRandomFromArray(cities);
-		let z = getRandomFromArray(zips);
-		let ctry = getRandomFromArray(countries);
-
-		//(name, age, email, city, zip, country)
-		let newC = new Contact(n, a, e, ct, z, ctry);
-		return newC;
-	}
-
 	printContactsToConsole() {
 		this.listOfContacts.forEach(function (c) {
 			console.log(c.name);
@@ -98,6 +80,24 @@ class ContactManager {
 		// We can only save strings in local Storage. So, let's convert
 		// ou array of contacts to JSON
 		localStorage.contacts = JSON.stringify(this.listOfContacts);
+	}
+
+	static createRandomContact() {
+		let n = getRandomFromArray(firstNames);//first
+		let last = getRandomFromArray(lastNames);//last
+		let e = last + "@" + n + '.com';//last@first.com
+
+		e = e.toLocaleLowerCase();
+		n = n + " " + last;//first + last
+
+		let a = Math.round(Math.random() * 100);
+		let ct = getRandomFromArray(cities);
+		let z = getRandomFromArray(zips);
+		let ctry = getRandomFromArray(countries);
+
+		//(name, age, email, city, zip, country)
+		let newC = new Contact(n, a, e, ct, z, ctry);
+		return newC;
 	}
 
 	//====SORTING FUNCTIONS

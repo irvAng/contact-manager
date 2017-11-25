@@ -9,6 +9,7 @@ function init() {
 	cm = new ContactManager();
 
 	cm.addTestData(4);
+	// cm.printContactsToConsole();
 
 	// Display contacts in a table
 	// Pass the id of the HTML element that will contain the table

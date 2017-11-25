@@ -16,7 +16,7 @@ function randNum(min, max) {
 //  -------------------------
 function randNum2(min, max){
     //  another way to randomize, the map function would be needed for this one, unless I encapsulate it here
-    return  ( Math.random() ) * ( max - min ) + min; // map embedded here
+    return  ( Math.random() ) * ( max - min )  + min; // map embedded here
     // return Math.random().map(0, 1, min, max);
 }
 
