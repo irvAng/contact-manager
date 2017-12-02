@@ -1,5 +1,5 @@
 # contact-manager
-A JavaScript contact manager for edX JS Intro Course.
+A JavaScript contact manager.
 
 The Contact Manager project is a work I did for W3C's introductory course to JavaScript (see below for orginal version). My version of the project adds the following functionalities:
 
