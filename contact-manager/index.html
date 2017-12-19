@@ -5,10 +5,10 @@
   <title>A contact manager, v3</title>
   <meta charset="utf-8" />
 
-  <script src='js/names.js'></script>
+  <script src='js/random-details.js'></script>
   <script src='js/contact-manager.js'></script>
   <script src='js/utilities.js'></script>
-  <script src='js/search-compare.js'></script>
+  <script src='js/compare-input.js'></script>
   <script src='js/table-display.js'></script>
   <script src='js/table-listeners.js'></script>
   <script src='js/listeners.js'></script>
@@ -33,7 +33,6 @@
         Email :
         <input type="email" id="email" required>
       </label>
-
       <label>
         City :
         <input type="text" id="city">
@@ -51,6 +50,7 @@
       <button id='addRandomContact' type='button'>Add two random Contacts</button>
     </fieldset>
   </form>
+
   <br>
   <div id='searchDiv'>
     <label for="searchInput">Search contact by name:
@@ -59,10 +59,7 @@
     <!-- Displays matches -->
     <input id='match-display' type='text' readonly placeholder="Displaying all contacts.">
     <button id='printList'> Print contacts to console</button>
-
   </div>
-
-
 
   <h2>List of contacts </h2>
   <!-- <h3>&#x25B2; &#x25BC; &#9650; &#9660;</h3> -->

@@ -1,4 +1,4 @@
-//  ------------------------
+//====UTILITIES
 //  Map function. Will produce values out of range if input is out of range
 //  https://gist.github.com/AugustMiller/85b54d49493bb71ba81e
 Number.prototype.map = function ( in_min , in_max , out_min , out_max ) {
@@ -16,7 +16,7 @@ function randNum(min, max) {
 //  -------------------------
 function randNum2(min, max){
     //  another way to randomize, the map function would be needed for this one, unless I encapsulate it here
-    return  ( Math.random() ) * ( max - min ) + min; // map embedded here
+    return  ( Math.random() ) * ( max - min )  + min; // map embedded here
     // return Math.random().map(0, 1, min, max);
 }
 
@@ -33,8 +33,13 @@ function reverse(string) {
 }
 
 //  -------------------------
-function getRandomFromArray (arr) {
+function getRandomFromArray2 (arr) {
 	let randomIndex = Math.floor(Math.random()*arr.length);
 	let randomElement = arr[randomIndex];
 	return randomElement;
+}
+
+//  -------------------------
+function getRandomFromArray (arr) {
+	return arr[Math.floor(Math.random()*arr.length)]
 }

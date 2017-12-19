@@ -1,4 +1,5 @@
 //	-----------------------------------
+//====CONTACT CLASS
 class Contact {
 	constructor(name, age, email, city, zip, country) {
 		this.name = name;
@@ -11,6 +12,7 @@ class Contact {
 }
 
 //	-----------------------------------
+//====CONTACT MANAGER CLASS
 class ContactManager {
 	constructor() {
 		// when we build the contact manager, it
@@ -21,21 +23,17 @@ class ContactManager {
 	}
 
 	addTestData(numberOfContacts) {
-		// var c1 = new Contact("Jimi Hendrix", "jimi@rip.com");
-		// var c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com");
-		// var c3 = new Contact("Angus Young", "angus@acdc.com");
-		// var c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com");
-
-		// this.add(c1);
-		// this.add(c2);
-		// this.add(c3);
-		// this.add(c4);
-
 		for (let i = 0; i < numberOfContacts; i++) {
 			let newC = ContactManager.createRandomContact();
 			this.add(newC);
-
 		}
+		this.resetSortByName();
+	}
+
+	//Sets previous caller's name to '' so sortByName() will sort ascending
+	resetSortByName() {
+		this.displayOfContacts = this.listOfContacts.slice();
+		ContactManager.prevCaller_sName = '';
 		// Let's sort the list of contacts by Name
 		this.sortByName();
 	}
@@ -47,6 +45,7 @@ class ContactManager {
 
 	add(contact) {
 		this.listOfContacts.push(contact);
+		this.displayOfContacts = this.listOfContacts.slice();//make a copy
 	}
 
 	remove(contact) {
@@ -60,24 +59,6 @@ class ContactManager {
 				break;
 			}
 		}
-	}
-
-	static createRandomContact() {
-		let n = getRandomFromArray(firstNames);//first
-		let last = getRandomFromArray(lastNames);//last
-		let e = last + "@" + n + '.com';//last@first.com
-		
-		e = e.toLocaleLowerCase();
-		n = n + " " + last;//first + last
-		
-		let a = Math.round(Math.random() * 100);
-		let ct = getRandomFromArray(cities);
-		let z = getRandomFromArray(zips);
-		let ctry = getRandomFromArray(countries);
-
-		//(name, age, email, city, zip, country)
-		let newC = new Contact(n, a, e, ct, z, ctry);
-		return newC;
 	}
 
 	printContactsToConsole() {
@@ -100,11 +81,37 @@ class ContactManager {
 		localStorage.contacts = JSON.stringify(this.listOfContacts);
 	}
 
-	//====SORTING FUNCTIONS
-	static toggleSortOrder() {
+	static createRandomContact() {
+		let n = getRandomFromArray(rCD.firstNames);//first
+		let last = getRandomFromArray(rCD.lastNames);//last
+		let e = last + "@" + n + '.com';//email: last@first.com
+
+		e = e.toLocaleLowerCase();
+		n = n + " " + last;//first + last
+
+		let a = Math.round(Math.random() * 100);//age
+		let ct = getRandomFromArray(rCD.cities);//city
+		let z = getRandomFromArray(rCD.zips);//zip
+		let ctry = getRandomFromArray(rCD.countries);//country
+
+		//new Contact(name, age, email, city, zip, country)
+		return new Contact(n, a, e, ct, z, ctry);
+	}
+
+	//====CONTACT MANAGER SORTING FUNCTIONS
+	static toggleSortOrderAndCompareInvoker(whoIsCalling) {
 		//Changing this variable to the opposite value changes 
 		//the sorting order of compare functions
 		ContactManager.sortOrder = -ContactManager.sortOrder;
+
+		/**Compare the names of the last called function with the function
+		 * calling at the moment, if they do not match, set sortOrder 
+		 * to 1, and assign new name to prevCaller'sName 
+		 * This part of the function ensures that the sort order always 
+		 * start in ascending order */
+		if (ContactManager.prevCaller_sName !== whoIsCalling) {
+			ContactManager.sortOrder = 1;
+		}
 	}
 
 	sortByName() {
@@ -114,8 +121,9 @@ class ContactManager {
 		// method we saw in the ES6 Point class in module 4
 		// We always call such methods using the name of the class followed
 		// by the dot operator
-		ContactManager.toggleSortOrder();
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByName.name);
 		this.displayOfContacts.sort(ContactManager.compareByName);
+		ContactManager.prevCaller_sName = this.sortByName.name;
 	}
 
 	// class method for comparing two contacts by name
@@ -128,6 +136,7 @@ class ContactManager {
 		// false
 		c1 = c1.name.toLowerCase();
 		c2 = c2.name.toLowerCase();
+
 		// JavaScript has builtin capabilities for comparing strings
 		// in alphabetical order
 		if (c1 < c2) return -1 * ContactManager.sortOrder;
@@ -135,9 +144,11 @@ class ContactManager {
 		return 0;
 	}
 
+
 	sortByAge() {
-		ContactManager.toggleSortOrder();
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByAge.name);
 		this.displayOfContacts.sort(ContactManager.compareAge);
+		ContactManager.prevCaller_sName = this.sortByAge.name;
 	}
 
 	static compareAge(c1, c2) {
@@ -147,8 +158,9 @@ class ContactManager {
 	}
 
 	sortByEmail() {
-		ContactManager.toggleSortOrder();
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByEmail.name);
 		this.displayOfContacts.sort(ContactManager.compareByEmail);
+		ContactManager.prevCaller_sName = this.sortByEmail.name;
 	}
 
 	static compareByEmail(c1, c2) {
@@ -163,8 +175,9 @@ class ContactManager {
 	}
 
 	sortByCity() {
-		ContactManager.toggleSortOrder();
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByCity.name);
 		this.displayOfContacts.sort(ContactManager.compareByCity);
+		ContactManager.prevCaller_sName = this.sortByCity.name;
 	}
 
 	static compareByCity(c1, c2) {
@@ -179,8 +192,9 @@ class ContactManager {
 	}
 
 	sortByZip() {
-		ContactManager.toggleSortOrder();
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByZip.name);
 		this.displayOfContacts.sort(ContactManager.compareZip);
+		ContactManager.prevCaller_sName = this.sortByZip.name;
 	}
 
 	static compareZip(c1, c2) {
@@ -190,8 +204,9 @@ class ContactManager {
 	}
 
 	sortByCountry() {
-		ContactManager.toggleSortOrder();
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByCountry.name);
 		this.displayOfContacts.sort(ContactManager.compareByCountry);
+		ContactManager.prevCaller_sName = this.sortByCountry.name;
 	}
 
 	static compareByCountry(c1, c2) {
@@ -208,8 +223,10 @@ class ContactManager {
 
 //	-----------------------------------
 ContactManager.sortOrder = -1;
-
+ContactManager.prevCaller_sName = '';//prevCaller'sName / name of last function to call
 /*
+
+A static function that checks if the callee is the same as before, if it is, it does nothing; if it is not, if it is a different callee, resets the ContactManager.sortOrder to 1
 
 https://www.w3schools.com/howto/howto_js_sort_table.asp
 

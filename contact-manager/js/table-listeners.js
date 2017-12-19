@@ -1,4 +1,4 @@
-//====TABLE LISTENERS AND LISTENER FUNCTIONS
+//====TABLE LISTENERS AND TABLE LISTENERS' FUNCTIONS
 //	-----------------------------------
 function addTableListeners(cm) {
 	let nameCell = document.querySelector('#nameCell');
@@ -29,7 +29,7 @@ function sortByNameListener(cm) {
 }
 
 //	-----------------------------------
-function sortByAgeListener(cm){
+function sortByAgeListener(cm) {
 	return function (e) {
 		cm.sortByAge();
 		displayContactsAsATable("contacts", cm);
@@ -55,7 +55,7 @@ function sortByCityListener(cm) {
 }
 
 //	-----------------------------------
-function sortByZipListener(cm){
+function sortByZipListener(cm) {
 	return function (e) {
 		cm.sortByZip();
 		displayContactsAsATable("contacts", cm);
@@ -70,10 +70,26 @@ function sortByCountryListener(cm) {
 	}
 }
 
+//	-----------------------------------
+function deleteContact(evt) {
 
+	let confirmation = confirm('Are you sure you want to delete this contact?');
+
+	if (confirmation) {
+		let id = parseInt(evt.target.dataset.id);
+
+		//using display of contacts, because it is the one tthat matches the 
+		// assigned dataset.id in createRows
+		cm.displayOfContacts.splice(id, 1);
+		cm.listOfContacts = cm.displayOfContacts.slice();
+		cm.save();
+		loadList();
+	}
+}
 
 
 //	-----------------------------------
+//unused at the moment
 function deleteTableListeners(cm) {
 	let nameCell = document.querySelector('#nameCell');
 	nameCell.removeEventListener('click', sortByName(cm).test1);

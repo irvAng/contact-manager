@@ -1,3 +1,4 @@
+//====SCRIPT
 window.onload = init;
 
 // The contact manager as a global variable
@@ -9,6 +10,7 @@ function init() {
 	cm = new ContactManager();
 
 	cm.addTestData(4);
+	// cm.printContactsToConsole();
 
 	// Display contacts in a table
 	// Pass the id of the HTML element that will contain the table
@@ -62,18 +64,7 @@ function loadList() {
 	displayFullListOfContacts("contacts", cm);
 }
 
-//	-----------------------------------
-function deleteContact(evt) {
 
-	let confirmation = confirm('Are you sure you want to delete this contact?');
-
-	if (confirmation) {
-		let id = parseInt(evt.target.dataset.id);
-		cm.listOfContacts.splice(id, 1);
-		cm.save();
-		loadList();
-	}
-}
 
 //	-----------------------------------
 function printList() {
@@ -83,7 +74,7 @@ function printList() {
 /* 
 https://stackoverflow.com/questions/6012823/how-to-make-html-table-cell-editable
 
-Optional projects
+Optional project
 
 Improve the CSS of the contact manager table.
 Add more complicated features to the contact manager:

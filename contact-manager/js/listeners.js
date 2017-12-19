@@ -1,3 +1,4 @@
+//====LISTENERS
 function addListeners(cm) {
 	//passing cm as reference instead of accessing as global variable
 	let searchInput = document.querySelector('#searchInput');
@@ -9,7 +10,6 @@ function addListeners(cm) {
 
 	let addRandomContact = document.querySelector('#addRandomContact');
 	addRandomContact.addEventListener('click', addTestDataL(cm));
-
 
 	/*** TABLE LISTENERS ADDED IN table-listeners.js ***/
 }
