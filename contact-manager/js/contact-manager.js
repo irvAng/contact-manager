@@ -81,6 +81,86 @@ class ContactManager {
 		localStorage.contacts = JSON.stringify(this.listOfContacts);
 	}
 
+	//====CONTACT MANAGER SORTING FUNCTIONS
+	sortByName() {
+		// As our array contains objects, we need to pass as argument
+		// a method that can compare two contacts.
+		// we use for that a class method, similar to the distance(p1, p2)
+		// method we saw in the ES6 Point class in module 4
+		// We always call such methods using the name of the class followed
+		// by the dot operator
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByName.name);
+		this.displayOfContacts.sort(ContactManager.sortStringByProp('name'));
+		ContactManager.prevCaller_sName = this.sortByName.name;
+	}
+
+	sortByEmail() {
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByEmail.name);
+		this.displayOfContacts.sort(ContactManager.sortStringByProp('email'));
+		ContactManager.prevCaller_sName = this.sortByEmail.name;
+	}
+
+	sortByCity() {
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByCity.name);
+		this.displayOfContacts.sort(ContactManager.sortStringByProp('city'));
+		ContactManager.prevCaller_sName = this.sortByCity.name;
+	}
+
+	sortByCountry() {
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByCountry.name);
+		this.displayOfContacts.sort(ContactManager.sortStringByProp('country'));
+		ContactManager.prevCaller_sName = this.sortByCountry.name;
+	}
+
+	sortByAge() {
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByAge.name);
+		this.displayOfContacts.sort(ContactManager.sortNumberByProp('age'));
+		ContactManager.prevCaller_sName = this.sortByAge.name;
+	}
+
+	sortByZip() {
+		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByZip.name);
+		this.displayOfContacts.sort(ContactManager.sortNumberByProp('zip'));
+		ContactManager.prevCaller_sName = this.sortByZip.name;
+	}
+
+	//====CONTACT MANAGER STATIC PROPERTIES
+	static sortStringByProp(propertyNameAsString) {//(string)
+		return (c1, c2) => {
+			c1 = c1[propertyNameAsString].toLowerCase();
+			c2 = c2[propertyNameAsString].toLowerCase();
+
+			if (c1 < c2)
+				return -1 * ContactManager.sortOrder;
+			if (c1 > c2)
+				return 1 * ContactManager.sortOrder;
+			return 0;
+		}
+	}
+
+	static sortNumberByProp(propertyNameAsString) {//(string)
+		return (c1, c2) => {
+			c1 = c1[propertyNameAsString];
+			c2 = c2[propertyNameAsString];
+			return (c1 - c2) * ContactManager.sortOrder;
+		}
+	}
+
+	static toggleSortOrderAndCompareInvoker(whoIsCalling) {//(string), name of function
+		//Changing this variable to the opposite value changes 
+		//the sorting order of compare functions
+		ContactManager.sortOrder = -ContactManager.sortOrder;
+
+		/**Compare the names of the last called function with the function
+		 * calling at the moment, if they do not match, set sortOrder 
+		 * to 1, and assign new name to prevCaller'sName 
+		 * This part of the function ensures that the sort order always 
+		 * start in ascending order */
+		if (ContactManager.prevCaller_sName !== whoIsCalling) {
+			ContactManager.sortOrder = 1;
+		}
+	}
+
 	static createRandomContact() {
 		let n = getRandomFromArray(rCD.firstNames);//first
 		let last = getRandomFromArray(rCD.lastNames);//last
@@ -96,128 +176,6 @@ class ContactManager {
 
 		//new Contact(name, age, email, city, zip, country)
 		return new Contact(n, a, e, ct, z, ctry);
-	}
-
-	//====CONTACT MANAGER SORTING FUNCTIONS
-	static toggleSortOrderAndCompareInvoker(whoIsCalling) {
-		//Changing this variable to the opposite value changes 
-		//the sorting order of compare functions
-		ContactManager.sortOrder = -ContactManager.sortOrder;
-
-		/**Compare the names of the last called function with the function
-		 * calling at the moment, if they do not match, set sortOrder 
-		 * to 1, and assign new name to prevCaller'sName 
-		 * This part of the function ensures that the sort order always 
-		 * start in ascending order */
-		if (ContactManager.prevCaller_sName !== whoIsCalling) {
-			ContactManager.sortOrder = 1;
-		}
-	}
-
-	sortByName() {
-		// As our array contains objects, we need to pass as argument
-		// a method that can compare two contacts.
-		// we use for that a class method, similar to the distance(p1, p2)
-		// method we saw in the ES6 Point class in module 4
-		// We always call such methods using the name of the class followed
-		// by the dot operator
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByName.name);
-		this.displayOfContacts.sort(ContactManager.compareByName);
-		ContactManager.prevCaller_sName = this.sortByName.name;
-	}
-
-	// class method for comparing two contacts by name
-	static compareByName(c1, c2) {
-		//compare lower case values. 
-		//Upper case letter has different value than lowercase letter
-		// 'd' > "D"
-		// true
-		// "D" > 'd'
-		// false
-		c1 = c1.name.toLowerCase();
-		c2 = c2.name.toLowerCase();
-
-		// JavaScript has builtin capabilities for comparing strings
-		// in alphabetical order
-		if (c1 < c2) return -1 * ContactManager.sortOrder;
-		if (c1 > c2) return 1 * ContactManager.sortOrder;
-		return 0;
-	}
-
-
-	sortByAge() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByAge.name);
-		this.displayOfContacts.sort(ContactManager.compareAge);
-		ContactManager.prevCaller_sName = this.sortByAge.name;
-	}
-
-	static compareAge(c1, c2) {
-		c1 = c1.age;
-		c2 = c2.age;
-		return (c1 - c2) * ContactManager.sortOrder;
-	}
-
-	sortByEmail() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByEmail.name);
-		this.displayOfContacts.sort(ContactManager.compareByEmail);
-		ContactManager.prevCaller_sName = this.sortByEmail.name;
-	}
-
-	static compareByEmail(c1, c2) {
-		c1 = c1.email.toLowerCase();
-		c2 = c2.email.toLowerCase();
-
-		if (c1 < c2)
-			return -1 * ContactManager.sortOrder;
-		if (c1 > c2)
-			return 1 * ContactManager.sortOrder;
-		return 0;
-	}
-
-	sortByCity() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByCity.name);
-		this.displayOfContacts.sort(ContactManager.compareByCity);
-		ContactManager.prevCaller_sName = this.sortByCity.name;
-	}
-
-	static compareByCity(c1, c2) {
-		c1 = c1.city.toLowerCase();
-		c2 = c2.city.toLowerCase();
-
-		if (c1 < c2)
-			return -1 * ContactManager.sortOrder;
-		if (c1 > c2)
-			return 1 * ContactManager.sortOrder;
-		return 0;
-	}
-
-	sortByZip() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByZip.name);
-		this.displayOfContacts.sort(ContactManager.compareZip);
-		ContactManager.prevCaller_sName = this.sortByZip.name;
-	}
-
-	static compareZip(c1, c2) {
-		c1 = c1.zip;
-		c2 = c2.zip;
-		return (c1 - c2) * ContactManager.sortOrder;
-	}
-
-	sortByCountry() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByCountry.name);
-		this.displayOfContacts.sort(ContactManager.compareByCountry);
-		ContactManager.prevCaller_sName = this.sortByCountry.name;
-	}
-
-	static compareByCountry(c1, c2) {
-		c1 = c1.country.toLowerCase();
-		c2 = c2.country.toLowerCase();
-
-		if (c1 < c2)
-			return -1 * ContactManager.sortOrder;
-		if (c1 > c2)
-			return 1 * ContactManager.sortOrder;
-		return 0;
 	}
 }
 

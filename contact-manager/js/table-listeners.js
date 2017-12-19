@@ -1,6 +1,9 @@
 //====TABLE LISTENERS AND TABLE LISTENERS' FUNCTIONS
 //	-----------------------------------
 function addTableListeners(cm) {
+	// let nameCell = document.querySelector('#nameCell');
+	// nameCell.addEventListener('click', sortByNameListener(cm));
+
 	let nameCell = document.querySelector('#nameCell');
 	nameCell.addEventListener('click', sortByNameListener(cm));
 
@@ -21,7 +24,7 @@ function addTableListeners(cm) {
 }
 
 //	-----------------------------------
-function sortByNameListener(cm) {
+function sortByNameListener(cm, propertyNameAsString) {
 	return function test1(e) {
 		cm.sortByName();
 		displayContactsAsATable("contacts", cm);
@@ -42,7 +45,6 @@ function sortByEmailListener(cm) {
 		cm.sortByEmail();
 		displayContactsAsATable("contacts", cm);
 	}
-	// console.log(arguments.callee);
 }
 
 //	-----------------------------------
@@ -51,7 +53,6 @@ function sortByCityListener(cm) {
 		cm.sortByCity();
 		displayContactsAsATable("contacts", cm);
 	}
-	// console.log(arguments.callee);
 }
 
 //	-----------------------------------
@@ -86,7 +87,6 @@ function deleteContact(evt) {
 		loadList();
 	}
 }
-
 
 //	-----------------------------------
 //unused at the moment

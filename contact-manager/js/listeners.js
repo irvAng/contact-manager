@@ -21,3 +21,8 @@ function addTestDataL(cm) {
 		displayFullListOfContacts("contacts", cm);
 	}
 }
+
+//	-----------------------------------
+function printList() {
+	console.log('Print contacts to console: ', '\n', cm.listOfContacts);
+}

@@ -65,12 +65,6 @@ function loadList() {
 }
 
 
-
-//	-----------------------------------
-function printList() {
-	console.log('Print contacts to console: ', '\n', cm.listOfContacts);
-}
-
 /* 
 https://stackoverflow.com/questions/6012823/how-to-make-html-table-cell-editable
 
