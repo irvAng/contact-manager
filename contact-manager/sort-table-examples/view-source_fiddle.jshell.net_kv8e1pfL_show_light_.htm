@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<!-- from: https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript -->
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="googlebot" content="noindex, nofollow">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- <script type="text/javascript" src="/js/lib/dummy.js"></script> -->
+
+	<!-- <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/css/result-light.css"> -->
+
+	<style type="text/css">
+		table {
+			width: 100%;
+			font: 12px arial;
+		}
+
+		th,
+		td {
+			min-width: 40px;
+			text-align: center;
+		}
+
+		th {
+			font-weight: bold;
+		}
+	</style>
+
+	<title></title>
+
+	<script type='text/javascript'>//<![CDATA[
+
+		function sortTable(table, col, reverse) {
+			console.log('reverse in sortTable',reverse);
+			var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+				tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
+				i;
+			reverse = -((+reverse) || -1);
+			tr = tr.sort(function (a, b) { // sort rows
+				return reverse // `-1 *` if want opposite order
+					* (a.cells[col].textContent.trim() // using `.textContent.trim()` for test
+						.localeCompare(b.cells[col].textContent.trim())
+					);
+			});
+			for (i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
+		}
+
+		function makeSortable(table) {
+			//if there is a table header
+			var th = table.tHead, i;
+			// console.log(th.rows[0]);
+			th && (th = th.rows[0]) && (th = th.cells);
+			// console.log(th);
+			if (th) {
+				i = th.length;//length 3, one for each cell
+
+			} else {
+				return; // if no `<thead>` then do nothing
+			}
+			//if there is a thead, go on
+			while (--i >= 0) (function (i) {
+				//i = 2, 1, 0
+				var dir = 1;
+				var counterTest = 0;
+				// th[i] = c3, c2, c1 / each cell
+				th[i].addEventListener('click', function () {
+					//1 - dir === 0 or 1 / 0 is always the first value
+					// 1 - 1 === 0; 1 - 0 ===1
+					// console.log('dir before: ', dir);
+					// dir = 1 - dir;
+					// sortTable(table, i, dir);// Irving trying to clear his head
+					
+					sortTable(table, i, (dir = 1 - dir));//originally
+					// console.log('dir after: ', dir);
+				});
+			}(i));
+		}
+
+		function makeAllSortable(parent) {
+			parent = parent || document.body;
+			var t = parent.getElementsByTagName('table'), i = t.length;// i===1
+
+			while (--i >= 0) {
+				//i === 0
+				makeSortable(t[i]);//pass the table (a table) through
+			}
+		}
+
+		window.onload = function () { makeAllSortable(); };
+//]]> 
+
+	</script>
+
+
+</head>
+
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>c1</th>
+				<th>c2</th>
+				<th>c3</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>a</td>
+				<td>t</td>
+				<td>p</td>
+			</tr>
+			<tr>
+				<td>a</td>
+				<td>v</td>
+				<td>r</td>
+			</tr>
+			<tr>
+				<td>f</td>
+				<td>a</td>
+				<td>d</td>
+			</tr>
+			<tr>
+				<td>h</td>
+				<td>t</td>
+				<td>i</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script>
+		// tell the embed parent frame the height of the content
+		if (window.parent && window.parent.parent) {
+			window.parent.parent.postMessage(["resultsFrame", {
+				height: document.body.getBoundingClientRect().height,
+				slug: "kv8e1pfL"
+			}], "*")
+		}
+	</script>
+
+</body>
+
+</html>
