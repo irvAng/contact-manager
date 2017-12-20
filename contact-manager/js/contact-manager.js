@@ -20,6 +20,13 @@ class ContactManager {
 		this.listOfContacts = [];
 		this.displayOfContacts = [];
 		this.dataCounter = 0;
+
+		//sortOrder will invert the sorting algorithms
+		//if sortOrder === 1, sorting = ascending; if -1, sorting = descending
+		this.sortOrder = 1;
+
+		//prevCaller'sName / name of last function to call
+		this.prevCaller_sName = '';
 	}
 
 	addTestData(numberOfContacts) {
@@ -33,7 +40,7 @@ class ContactManager {
 	//Sets previous caller's name to '' so sortByName() will sort ascending
 	resetSortByName() {
 		this.displayOfContacts = this.listOfContacts.slice();
-		ContactManager.prevCaller_sName = '';
+		this.prevCaller_sName = '';
 		// Let's sort the list of contacts by Name
 		this.sortByName();
 	}
@@ -82,6 +89,21 @@ class ContactManager {
 	}
 
 	//====CONTACT MANAGER SORTING FUNCTIONS
+	toggleSortOrderAndCompareInvoker(whoIsCalling) {//(string), name of function
+		//Changing this variable to the opposite value changes 
+		//the sorting order of compare functions
+		this.sortOrder = -this.sortOrder;
+
+		/**Compare the names of the last called function with the function
+		 * calling at the moment, if they do not match, set sortOrder 
+		 * to 1, and assign new name to prevCaller'sName 
+		 * This part of the function ensures that the sort order always 
+		 * start in ascending order */
+		if (this.prevCaller_sName !== whoIsCalling) {
+			this.sortOrder = 1;
+		}
+	}
+
 	sortByName() {
 		// As our array contains objects, we need to pass as argument
 		// a method that can compare two contacts.
@@ -89,75 +111,60 @@ class ContactManager {
 		// method we saw in the ES6 Point class in module 4
 		// We always call such methods using the name of the class followed
 		// by the dot operator
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByName.name);
-		this.displayOfContacts.sort(ContactManager.sortStringByProp('name'));
-		ContactManager.prevCaller_sName = this.sortByName.name;
+		this.toggleSortOrderAndCompareInvoker(this.sortByName.name);
+		this.displayOfContacts.sort(ContactManager.sortStringByProp('name', this.sortOrder));
+		this.prevCaller_sName = this.sortByName.name;
 	}
 
 	sortByEmail() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByEmail.name);
-		this.displayOfContacts.sort(ContactManager.sortStringByProp('email'));
-		ContactManager.prevCaller_sName = this.sortByEmail.name;
+		this.toggleSortOrderAndCompareInvoker(this.sortByEmail.name);
+		this.displayOfContacts.sort(ContactManager.sortStringByProp('email', this.sortOrder));
+		this.prevCaller_sName = this.sortByEmail.name;
 	}
 
 	sortByCity() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByCity.name);
-		this.displayOfContacts.sort(ContactManager.sortStringByProp('city'));
-		ContactManager.prevCaller_sName = this.sortByCity.name;
+		this.toggleSortOrderAndCompareInvoker(this.sortByCity.name);
+		this.displayOfContacts.sort(ContactManager.sortStringByProp('city', this.sortOrder));
+		this.prevCaller_sName = this.sortByCity.name;
 	}
 
 	sortByCountry() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByCountry.name);
-		this.displayOfContacts.sort(ContactManager.sortStringByProp('country'));
-		ContactManager.prevCaller_sName = this.sortByCountry.name;
+		this.toggleSortOrderAndCompareInvoker(this.sortByCountry.name);
+		this.displayOfContacts.sort(ContactManager.sortStringByProp('country', this.sortOrder));
+		this.prevCaller_sName = this.sortByCountry.name;
 	}
 
 	sortByAge() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByAge.name);
-		this.displayOfContacts.sort(ContactManager.sortNumberByProp('age'));
-		ContactManager.prevCaller_sName = this.sortByAge.name;
+		this.toggleSortOrderAndCompareInvoker(this.sortByAge.name);
+		this.displayOfContacts.sort(ContactManager.sortNumberByProp('age', this.sortOrder));
+		this.prevCaller_sName = this.sortByAge.name;
 	}
 
 	sortByZip() {
-		ContactManager.toggleSortOrderAndCompareInvoker(this.sortByZip.name);
-		this.displayOfContacts.sort(ContactManager.sortNumberByProp('zip'));
-		ContactManager.prevCaller_sName = this.sortByZip.name;
+		this.toggleSortOrderAndCompareInvoker(this.sortByZip.name);
+		this.displayOfContacts.sort(ContactManager.sortNumberByProp('zip', this.sortOrder));
+		this.prevCaller_sName = this.sortByZip.name;
 	}
 
-	//====CONTACT MANAGER STATIC PROPERTIES
-	static sortStringByProp(propertyNameAsString) {//(string)
+	//====CONTACT MANAGER STATIC FUNCTIONS
+	static sortStringByProp(propertyNameAsString, sortOrder) {//(string)
 		return (c1, c2) => {
 			c1 = c1[propertyNameAsString].toLowerCase();
 			c2 = c2[propertyNameAsString].toLowerCase();
 
 			if (c1 < c2)
-				return -1 * ContactManager.sortOrder;
+				return -1 * sortOrder;
 			if (c1 > c2)
-				return 1 * ContactManager.sortOrder;
+				return 1 * sortOrder;
 			return 0;
 		}
 	}
 
-	static sortNumberByProp(propertyNameAsString) {//(string)
+	static sortNumberByProp(propertyNameAsString, sortOrder) {//(string)
 		return (c1, c2) => {
 			c1 = c1[propertyNameAsString];
 			c2 = c2[propertyNameAsString];
-			return (c1 - c2) * ContactManager.sortOrder;
-		}
-	}
-
-	static toggleSortOrderAndCompareInvoker(whoIsCalling) {//(string), name of function
-		//Changing this variable to the opposite value changes 
-		//the sorting order of compare functions
-		ContactManager.sortOrder = -ContactManager.sortOrder;
-
-		/**Compare the names of the last called function with the function
-		 * calling at the moment, if they do not match, set sortOrder 
-		 * to 1, and assign new name to prevCaller'sName 
-		 * This part of the function ensures that the sort order always 
-		 * start in ascending order */
-		if (ContactManager.prevCaller_sName !== whoIsCalling) {
-			ContactManager.sortOrder = 1;
+			return (c1 - c2) * sortOrder;
 		}
 	}
 
@@ -179,9 +186,6 @@ class ContactManager {
 	}
 }
 
-//	-----------------------------------
-ContactManager.sortOrder = -1;
-ContactManager.prevCaller_sName = '';//prevCaller'sName / name of last function to call
 /*
 
 A static function that checks if the callee is the same as before, if it is, it does nothing; if it is not, if it is a different callee, resets the ContactManager.sortOrder to 1
