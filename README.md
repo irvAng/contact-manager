@@ -15,4 +15,4 @@ The Contact Manager project is a work I did for W3C's introductory course to Jav
 
 A live version of the contact manager can as well be found here: [Contact manager - CodePen](https://codepen.io/ialuna/pen/eyZYRJ?editors=0010).
 
-[Original W3C project] (https://codepen.io/w3devcampus/pen/awypEg).
+[Original W3C project](https://codepen.io/w3devcampus/pen/awypEg).
