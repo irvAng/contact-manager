@@ -13,6 +13,6 @@ The Contact Manager project is a work I did for W3C's introductory course to Jav
 
 - Sortable header using different sort algorithms.
 
-#### -A live version of the contact manager can as well be found here: [Contact manager - CodePen](https://codepen.io/ialuna/pen/eyZYRJ?editors=0010). or here [in GitHub](https://irvang.github.io/contact-manager/).
+#### A live version of the contact manager can as well be found here: [Contact manager - CodePen](https://codepen.io/ialuna/pen/eyZYRJ?editors=0010). or here [in GitHub](https://irvang.github.io/contact-manager/).
 
-#### -[Initial W3C project](https://codepen.io/w3devcampus/pen/awypEg).
+#### [Initial W3C project](https://codepen.io/w3devcampus/pen/awypEg).
