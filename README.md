@@ -3,15 +3,15 @@
 
 The Contact Manager project is a work I did for W3C's introductory course to JavaScript (see below for orginal version). My version of the project adds the following functionalities:
 
--Improvement of the CSS
+- Improvement of the CSS
 
--Added delete feature, trash bin icon, and hover on trash bin cell.
+- Added delete feature, trash bin icon, and hover on trash bin cell.
 
--Use of dataset.id for the trash bin listener.
+- Use of dataset.id for the trash bin listener.
 
--Search form, which also reduces the table as it is typed into it.
+- Search form, which also reduces the table as it is typed into it.
 
--Sortable header using different sort algorithms.
+- Sortable header using different sort algorithms.
 
 #### -A live version of the contact manager can as well be found here: [Contact manager - CodePen](https://codepen.io/ialuna/pen/eyZYRJ?editors=0010). or here [in GitHub](https://irvang.github.io/contact-manager/).
 
