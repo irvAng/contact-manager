@@ -1,8 +1,16 @@
 body {
-	background-color: lightgoldenrodyellow;
+	background-color: #171b2c;
 	font-size: 20px;
 }
 
+#topDiv {
+	width: 1000px;
+	margin: 0 auto;
+	background-color: #eaffeb;
+	min-height: 100vh;
+	padding: 10px;
+	border: 1px solid orange;
+}
 /* FORM */
 /* legend { background-color: rgb(181, 228, 242)} */
 fieldset {
@@ -55,9 +63,14 @@ fieldset {
 }
 
  /*  TABLE */
+ #contacts {
+	overflow: auto;
+ }
+
  table {
 	margin-top: 20px;
 	width: 100%;
+	
  }
  table,
  tr,
