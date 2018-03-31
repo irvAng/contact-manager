@@ -4,7 +4,7 @@ body {
 }
 
 #topDiv {
-	width: 1000px;
+	max-width: 1000px;
 	margin: 0 auto;
 	background-color: #eaffeb;
 	min-height: 100vh;
