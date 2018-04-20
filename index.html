@@ -18,69 +18,69 @@
 </head>
 
 <body>
-	<div id="topDiv">
-		<p>
-			<a href='https://github.com/irvAng/contact-manager' target="_blank">See source code on GitHub
+	 <div id="topDiv">
+        <p>
+            <a href='https://github.com/irvAng/contact-manager' target="_blank">See source code on GitHub
 			</a>
-		</p>
-		<form id='inputForm' onsubmit="return formSubmitted();">
-			<fieldset>
-				<legend>Personal informations</legend>
-				<label>
-					Name :
+        </p>
+        <form id='inputForm' onsubmit="return formSubmitted();">
+            <fieldset>
+                <legend>Personal information</legend>
+                <label>
+					Name :  <br>
 					<input type="text" id="name" required placeholder="First Last">
 				</label>
-				<label>
-					Age :
+                <label>
+					Age : <br>
 					<input type="number" min='0' max='120' id="age" required>
 				</label>
-				<label>
-					Email :
+                <label>
+					Email : <br>
 					<input type="email" id="email" required>
 				</label>
-				<label>
-					City :
+                <label>
+					City : <br>
 					<input type="text" id="city">
 				</label>
-				<label>
-					Zip Code :
+                <label>
+					Zip Code : <br>
 					<input type="number" min='0' max='99999' id="zipCode" placeholder='00000'>
 				</label>
-				<label>
-					Country :
+                <label>
+					Country : <br>
 					<input type="text" id="country">
 				</label>
-				<br>
-				<button>Add new Contact</button>
-				<button id='addRandomContact' type='button'>Add two random Contacts</button>
-			</fieldset>
-		</form>
+                <br>
+                <button>Add new Contact</button>
+                <button id='addRandomContact' type='button'>Add two random Contacts</button>
+            </fieldset>
+        </form>
 
-		<br>
-		<div id='searchDiv'>
-			<label for="searchInput">Search contact by name:
+        <br>
+        <div id='searchDiv'>
+            <label for="searchInput">Search contact by name:
 				<input id='searchInput' type="text" placeholder="First Last">
 			</label>
-			<!-- Displays matches -->
-			<input id='match-display' type='text' readonly placeholder="Displaying all contacts.">
-			<button id='printList'> Print contacts to console</button>
-		</div>
+            <!-- Displays matches -->
+            <input id='match-display' type='text' readonly placeholder="Displaying all contacts.">
+            <button id='printList'> Print contacts to console</button>
+        </div>
 
-		<h2>List of contacts </h2>
-		<p>To sort, click on the corresponding table header.</p>
-		<!-- <h3>&#x25B2; &#x25BC; &#9650; &#9660;</h3> -->
+        <h2>List of contacts </h2>
+        <p>To sort, click on the corresponding table header.</p>
+        <!-- <h3>&#x25B2; &#x25BC; &#9650; &#9660;</h3> -->
 
-		<p>
-			<button onclick="emptyList();">Empty</button>
-			<button onclick="cm.save();">Save</button>
-			<button onclick="loadList();">Load</button>
-		</p>
+        <p>
+            <button onclick="emptyList();">Empty</button>
+            <button onclick="cm.save();">Save</button>
+            <button onclick="loadList();">Load</button>
+        </p>
 
-		<div id="contacts">
-			<!-- TABLE GOES HERE -->
-		</div>
+        <div id="contacts">
+            <!-- TABLE GOES HERE -->
+        </div>
 
-	</div>
+    </div>
 </body>
 
 </html>
